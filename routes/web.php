@@ -6,6 +6,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -56,11 +57,15 @@ Route::middleware('auth')->group(function () {
     route::put('buku/update/{id}', [BookController::class, 'update'])->name('buku.update');
 
     //Transaction
-    Route::resource('transaction', App\Http\Controllers\TransactionController::class);
+    Route::resource('transaction', App\Http\Controllers\TransactionController::class)->middleware('role:User');
     Route::get('get-buku/{id}', [\App\Http\Controllers\TransactionController::class, 'getBukuByIdCategory']);
     Route::get('print-peminjam/{id}', [\App\Http\Controllers\TransactionController::class, 'print'])->name('print-peminjam');
     Route::post('transaction/{id}/return', [\App\Http\Controllers\TransactionController::class, 'returnBook'])->name('transaction.return');
 
     //role
     Route::resource('role', RoleController::class);
+    //user
+    Route::resource('user', UserController::class);
+    Route::get('user/{id}/roles', [UserController::class, 'editRole'])->name('user.roles');
+    Route::post('user/{id}/updateRoles', [UserController::class, 'updateRoles'])->name('user.updateRoles');
 });

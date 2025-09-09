@@ -61,7 +61,7 @@ class RoleController extends Controller
     public function update(Request $request, string $id)
     {
         $roles = Roles::find($id);
-        $roles->nama_kategori = $request->name;
+        $roles->name = $request->name;
         $roles->save();
         Alert::success('Berhasil', 'Role Berhasil diubah');
 

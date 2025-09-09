@@ -17,7 +17,7 @@
                 @csrf
                 @method('PUT')
                 <label for="" class="form-label">Nama Role</label>
-                <input type="text" class="form-control" name="nama_kategori" value="{{ $edit->name }}">
+                <input type="text" class="form-control" name="name" value="{{ $edit->name }}">
 
                 <button type="submit" class="btn btn-primary mt-2">Kirim</button>
                 <a href="{{ url()->previous() }}" class="btn btn-success">kembali</a>
